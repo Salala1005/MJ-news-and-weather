@@ -51,7 +51,7 @@ function displayWeatherData(data) {
   var wind = data.list[0].wind.speed;
 
   var display = $(`<div class= "display m-3">
-    <h3>${cityName} ${now}</h3>
+    <h4>${cityName} ${now}</h4>
     <img src="${icon}" alt="Weather Icon">
     <p> Temperature: ${temperature}°c</p>
     <p> Humidity: ${humidity}%</p>
@@ -139,7 +139,7 @@ function displayNYTimesData(data) {
         imageElement = `<img src="${imageUrl}" class="card-img-top nytimes-img" alt="${article.title}">`;
       }
 
-      var articleElement = $(`<div class="card m-3">
+      var articleElement = $(`<div class="card m-3 bg-light">
         <div class="row no-gutters">
           <div class="col-md-4">
             ${imageElement}
