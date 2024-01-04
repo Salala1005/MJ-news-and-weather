@@ -9,3 +9,5 @@ Weather forecast can be viewd in the modal.
 [Link to the Web page]( https://salala1005.github.io/MJ-news-and-weather/)
 
 [Link to the Github](https://github.com/Salala1005/MJ-news-and-weather)
+
+[Link to the presentation](https://docs.google.com/presentation/d/1EN7olgR1qe_iwaugXHd3vXyNoVD-LpOjQAbnxVAiyNQ/edit#slide=id.g29f43f0a72_0_24)
