@@ -1,5 +1,7 @@
 var searchInput = $("#search-input");
 var searchButton = $("#search-button");
+var searchHistory = JSON.parse(localStorage.getItem("input")) || [];
+
 
 searchButton.on("click", function (e) {
   e.preventDefault();
@@ -10,7 +12,17 @@ searchButton.on("click", function (e) {
 
   // call news
   fetchNYTimesData();
+
+  // to see the saved search
+  saveHistory();
 });
+
+// to save search in the local storage
+function saveHistory() {
+  var historyValue = $("#search-input").val();
+  searchHistory.push(historyValue);
+  localStorage.setItem("input", JSON.stringify(searchHistory));
+}
 
 // get weather data
 function fetchWeatherData(city) {
@@ -45,9 +57,9 @@ function displayWeatherData(data) {
     <p> Humidity: ${humidity}%</p>
     <p> Wind Speed: ${wind}Mph</p>
   </div>`);
+  
   $("#today").empty();
   $("#today").addClass("card");
-
   $("#today").append(display);
 
   var showForecastButton = $(
@@ -127,7 +139,7 @@ function displayNYTimesData(data) {
         imageElement = `<img src="${imageUrl}" class="card-img-top nytimes-img" alt="${article.title}">`;
       }
 
-      var articleElement = $(`<div class="card my-4">
+      var articleElement = $(`<div class="card m-3">
         <div class="row no-gutters">
           <div class="col-md-4">
             ${imageElement}
