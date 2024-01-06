@@ -15,6 +15,9 @@ searchButton.on("click", function (e) {
 
   // to see the saved search
   saveHistory();
+
+  // history
+  init();
 });
 
 // to save search in the local storage
@@ -23,6 +26,62 @@ function saveHistory() {
   searchHistory.push(historyValue);
   localStorage.setItem("input", JSON.stringify(searchHistory));
 }
+
+function init() {
+  $("#history").empty();
+  var recentHistory = [...searchHistory].reverse();
+  for (let i = 0; i < recentHistory.length; i++) {
+    if (i < 5) {
+      var cityButton = $(
+        `<button class= " btn btn-secondary m-1 btn-sm col-auto"> ${recentHistory[i]} </button>`
+      );
+      $("#history").append(cityButton);
+
+      cityButton.attr("data-cityname", recentHistory[i]);
+    }
+  }
+  // to display clicked saved history buttons
+  $("#history").on("click", ["data-cityname"], function (e) {
+    var cityData = e.target.dataset.cityname;
+    var queryURL =
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
+      cityData +
+      "&appid=5623fb7d8675d169764d733cafc79bab&units=metric";
+    fetch(queryURL)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        // console.log(data);
+
+        var cityName = data.city.name;
+        var now = dayjs().format("DD/MM/YYYY");
+        // console.log(now);
+        var temperature = data.list[0].main.temp;
+        var icon =
+          "https://openweathermap.org/img/w/" +
+          data.list[0].weather[0].icon +
+          ".png";
+        // console.log(icon);
+        var humidity = data.list[0].main.humidity;
+        var wind = data.list[0].wind.speed;
+
+        var display = $(`<div class= "display m-3" >
+        <h3>${cityName} (${now})</h2>
+        <img src="${icon}" alt="Weather Icon">
+        <p> Temperature: ${temperature}°c</p>
+        <p> Humidity: ${humidity}%</p>
+        <p> Wind Speed: ${wind}Mph</p>
+        </div>`);
+
+        // display.append(cityName, now, temperature, icon, humidity, wind)
+        $("#today").empty();
+        $("#today").append(display);
+      });
+    });
+  };
+
+
 
 // get weather data
 function fetchWeatherData(city) {
