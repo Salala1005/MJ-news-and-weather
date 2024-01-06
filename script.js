@@ -82,7 +82,6 @@ function init() {
   };
 
 
-
 // get weather data
 function fetchWeatherData(city) {
   var queryURL =
