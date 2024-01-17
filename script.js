@@ -85,7 +85,7 @@ function init() {
 // get weather data
 function fetchWeatherData(city) {
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city +
     "&appid=5623fb7d8675d169764d733cafc79bab&units=metric";
   fetch(queryURL)
